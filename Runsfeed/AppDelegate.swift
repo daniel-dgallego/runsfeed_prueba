@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         self.window!.backgroundColor = UIColor.whiteColor()
         self.window!.makeKeyAndVisible()
+        
+        
+        //config
+        GMSServices.provideAPIKey(settings.keyGoogle)
         
         
         let feedVC = FeedViewController()

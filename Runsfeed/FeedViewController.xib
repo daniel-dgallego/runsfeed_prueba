@@ -19,25 +19,25 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vay-zi-8ES">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="f68-fg-ltw">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="f68-fg-ltw">
+                            <rect key="frame" x="15" y="25" width="570" height="575"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="Q7S-4b-oMx"/>
                                 <outlet property="delegate" destination="-1" id="I0U-Nl-WDa"/>
                             </connections>
                         </tableView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="f68-fg-ltw" secondAttribute="bottom" id="Sz9-lU-NFC"/>
-                        <constraint firstItem="f68-fg-ltw" firstAttribute="leading" secondItem="Vay-zi-8ES" secondAttribute="leading" id="Ytq-aa-G16"/>
-                        <constraint firstItem="f68-fg-ltw" firstAttribute="top" secondItem="Vay-zi-8ES" secondAttribute="top" id="noZ-bi-VOO"/>
-                        <constraint firstAttribute="trailing" secondItem="f68-fg-ltw" secondAttribute="trailing" id="uzF-VL-xht"/>
+                        <constraint firstItem="f68-fg-ltw" firstAttribute="leading" secondItem="Vay-zi-8ES" secondAttribute="leading" constant="15" id="Ytq-aa-G16"/>
+                        <constraint firstItem="f68-fg-ltw" firstAttribute="top" secondItem="Vay-zi-8ES" secondAttribute="top" constant="25" id="noZ-bi-VOO"/>
+                        <constraint firstAttribute="trailing" secondItem="f68-fg-ltw" secondAttribute="trailing" constant="15" id="uzF-VL-xht"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Vay-zi-8ES" secondAttribute="bottom" id="763-70-baO"/>
                 <constraint firstItem="Vay-zi-8ES" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Xu3-fW-UDQ"/>

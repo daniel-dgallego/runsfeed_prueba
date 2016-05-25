@@ -1,5 +1,5 @@
 //
-//  CellMap.swift
+//  CellComment.swift
 //  Runsfeed
 //
 //  Created by Daniel Gallego Peralta on 25/5/16.
@@ -7,16 +7,14 @@
 //
 
 import UIKit
-import GoogleMaps
 
-class CellMap: UITableViewCell {
+class CellComment: UITableViewCell {
 
-    @IBOutlet  var mapView: GMSMapView!
-    
+    @IBOutlet weak var imageUser: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        setupMap()
+        setupCell()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -28,15 +26,18 @@ class CellMap: UITableViewCell {
     //MARK: - static method
     
     static func returnID()->String{
-        return "CellMap"
+        return "CellComment"
     }
     
     
-    //MARK: - Map
+    //MARK: - Custom Views
     
-    
-    func setupMap(){
-        self.mapView.userInteractionEnabled = false
+    func setupCell(){
+        
+        self.imageUser.layer.masksToBounds = false
+        self.imageUser.clipsToBounds = true
+        self.imageUser.layer.cornerRadius = self.imageUser.frame.size.width / 2
+        
     }
     
 }

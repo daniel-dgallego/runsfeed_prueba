@@ -1,5 +1,5 @@
 //
-//  CellMap.swift
+//  CellLike.swift
 //  Runsfeed
 //
 //  Created by Daniel Gallego Peralta on 25/5/16.
@@ -7,16 +7,12 @@
 //
 
 import UIKit
-import GoogleMaps
 
-class CellMap: UITableViewCell {
+class CellLike: UITableViewCell {
 
-    @IBOutlet  var mapView: GMSMapView!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        setupMap()
+        // Initialization code
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -25,18 +21,11 @@ class CellMap: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
     //MARK: - static method
     
     static func returnID()->String{
-        return "CellMap"
-    }
-    
-    
-    //MARK: - Map
-    
-    
-    func setupMap(){
-        self.mapView.userInteractionEnabled = false
+        return "CellLike"
     }
     
 }

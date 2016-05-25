@@ -16,7 +16,36 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V3G-2r-EUO">
                         <rect key="frame" x="0.0" y="0.0" width="355" height="167.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TPR-jX-DQM" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="355" height="167.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user.png" translatesAutoresizingMaskIntoConstraints="NO" id="Rb6-Na-5C4">
+                                <rect key="frame" x="285" y="117.5" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="5mH-13-JDP"/>
+                                    <constraint firstAttribute="height" constant="50" id="YQa-cg-tln"/>
+                                    <constraint firstAttribute="width" constant="50" id="dHw-Vh-xcU"/>
+                                    <constraint firstAttribute="width" constant="60" id="hgf-pm-3Qw"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="5mH-13-JDP"/>
+                                        <exclude reference="hgf-pm-3Qw"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="TPR-jX-DQM" firstAttribute="leading" secondItem="V3G-2r-EUO" secondAttribute="leading" id="4cg-Be-xw7"/>
+                            <constraint firstAttribute="bottom" secondItem="Rb6-Na-5C4" secondAttribute="bottom" id="9PU-0U-Pvl"/>
+                            <constraint firstAttribute="trailing" secondItem="TPR-jX-DQM" secondAttribute="trailing" id="EpM-Ec-29M"/>
+                            <constraint firstAttribute="trailing" secondItem="Rb6-Na-5C4" secondAttribute="trailing" constant="20" id="hPO-gL-Mwd"/>
+                            <constraint firstItem="TPR-jX-DQM" firstAttribute="top" secondItem="V3G-2r-EUO" secondAttribute="top" id="pIL-hs-qiA"/>
+                            <constraint firstAttribute="bottom" secondItem="TPR-jX-DQM" secondAttribute="bottom" id="snr-nj-tdx"/>
+                        </constraints>
                     </view>
                 </subviews>
                 <constraints>
@@ -26,7 +55,13 @@
                     <constraint firstAttribute="bottom" secondItem="V3G-2r-EUO" secondAttribute="bottom" id="vgb-Sw-WgP"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="mapView" destination="TPR-jX-DQM" id="mGm-8p-6k0"/>
+            </connections>
             <point key="canvasLocation" x="268.5" y="404"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="user.png" width="60" height="60"/>
+    </resources>
 </document>
