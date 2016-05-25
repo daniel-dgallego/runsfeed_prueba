@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeedViewController" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeedViewController" customModule="Runsfeed" customModuleProvider="target">
             <connections>
+                <outlet property="tableFeed" destination="f68-fg-ltw" id="Ve9-aT-A9I"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -13,7 +15,35 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vay-zi-8ES">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="f68-fg-ltw">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="Q7S-4b-oMx"/>
+                                <outlet property="delegate" destination="-1" id="I0U-Nl-WDa"/>
+                            </connections>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="f68-fg-ltw" secondAttribute="bottom" id="Sz9-lU-NFC"/>
+                        <constraint firstItem="f68-fg-ltw" firstAttribute="leading" secondItem="Vay-zi-8ES" secondAttribute="leading" id="Ytq-aa-G16"/>
+                        <constraint firstItem="f68-fg-ltw" firstAttribute="top" secondItem="Vay-zi-8ES" secondAttribute="top" id="noZ-bi-VOO"/>
+                        <constraint firstAttribute="trailing" secondItem="f68-fg-ltw" secondAttribute="trailing" id="uzF-VL-xht"/>
+                    </constraints>
+                </view>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Vay-zi-8ES" secondAttribute="bottom" id="763-70-baO"/>
+                <constraint firstItem="Vay-zi-8ES" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Xu3-fW-UDQ"/>
+                <constraint firstAttribute="trailing" secondItem="Vay-zi-8ES" secondAttribute="trailing" id="f0b-u1-QKa"/>
+                <constraint firstItem="Vay-zi-8ES" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wKj-x1-sU0"/>
+            </constraints>
         </view>
     </objects>
 </document>

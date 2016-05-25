@@ -21,4 +21,11 @@ class CellDataRun: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
+    //MARK: - static method
+    
+    static func returnID()->String{
+        return "CellDataRun"
+    }
+    
 }

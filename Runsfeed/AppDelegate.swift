@@ -19,6 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         self.window!.backgroundColor = UIColor.whiteColor()
         self.window!.makeKeyAndVisible()
+        
+        
+        let feedVC = FeedViewController()
+        let navVC = UINavigationController(rootViewController: feedVC)
+        navVC.setNavigationBarHidden(true, animated: false)
+        self.window?.rootViewController = navVC
+        
         return true
     }
 

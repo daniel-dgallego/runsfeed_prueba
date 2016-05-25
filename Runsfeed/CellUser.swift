@@ -10,15 +10,36 @@ import UIKit
 
 class CellUser: UITableViewCell {
 
+    @IBOutlet weak var imageUser: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        setupCell()
+        
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    
+    //MARK: - static method
+    
+    static func returnID()->String{
+        return "CellUser"
+    }
+    
+    
+    //MARK: - Custom Views
+    
+    func setupCell(){
+        imageUser.layer.masksToBounds = false
+        imageUser.layer.cornerRadius = imageUser.frame.size.width / 2
+        imageUser.clipsToBounds = true
     }
     
 }
