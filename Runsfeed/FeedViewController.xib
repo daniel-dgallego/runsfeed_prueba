@@ -7,8 +7,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeedViewController" customModule="Runsfeed" customModuleProvider="target">
             <connections>
+                <outlet property="indicador" destination="7T0-TH-JYJ" id="5q2-YV-Kvz"/>
                 <outlet property="tableFeed" destination="f68-fg-ltw" id="Ve9-aT-A9I"/>
+                <outlet property="topConstantTable" destination="noZ-bi-VOO" id="fdK-cY-WRG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewContainer" destination="Vay-zi-8ES" id="0HX-zw-wXN"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -27,17 +30,23 @@
                                 <outlet property="delegate" destination="-1" id="I0U-Nl-WDa"/>
                             </connections>
                         </tableView>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="7T0-TH-JYJ">
+                            <rect key="frame" x="281.5" y="281.5" width="37" height="37"/>
+                            <color key="color" red="0.01176470588" green="0.78823529410000004" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstItem="7T0-TH-JYJ" firstAttribute="centerY" secondItem="Vay-zi-8ES" secondAttribute="centerY" id="JcR-Yb-2ct"/>
                         <constraint firstAttribute="bottom" secondItem="f68-fg-ltw" secondAttribute="bottom" id="Sz9-lU-NFC"/>
                         <constraint firstItem="f68-fg-ltw" firstAttribute="leading" secondItem="Vay-zi-8ES" secondAttribute="leading" constant="15" id="Ytq-aa-G16"/>
                         <constraint firstItem="f68-fg-ltw" firstAttribute="top" secondItem="Vay-zi-8ES" secondAttribute="top" constant="25" id="noZ-bi-VOO"/>
+                        <constraint firstItem="7T0-TH-JYJ" firstAttribute="centerX" secondItem="Vay-zi-8ES" secondAttribute="centerX" id="sOt-qg-gz1"/>
                         <constraint firstAttribute="trailing" secondItem="f68-fg-ltw" secondAttribute="trailing" constant="15" id="uzF-VL-xht"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Vay-zi-8ES" secondAttribute="bottom" id="763-70-baO"/>
                 <constraint firstItem="Vay-zi-8ES" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Xu3-fW-UDQ"/>

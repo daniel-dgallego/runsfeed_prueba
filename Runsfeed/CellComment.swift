@@ -10,7 +10,15 @@ import UIKit
 
 class CellComment: UITableViewCell {
 
+    
+    var noComment = false
+    
     @IBOutlet weak var imageUser: UIImageView!
+    @IBOutlet weak var viewGeneral: UIView!
+    @IBOutlet weak var labNameUser: UILabel!
+    @IBOutlet weak var labComentario: UILabel!
+    @IBOutlet weak var labTotal: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -32,11 +40,26 @@ class CellComment: UITableViewCell {
     
     //MARK: - Custom Views
     
+    
+    func setNoComment(){
+        noComment = true
+    }
+    
+    
     func setupCell(){
         
-        self.imageUser.layer.masksToBounds = false
-        self.imageUser.clipsToBounds = true
-        self.imageUser.layer.cornerRadius = self.imageUser.frame.size.width / 2
+        if noComment{
+            for vista in self.contentView.subviews{
+                vista.removeFromSuperview()
+            }
+        }
+        else{
+            self.imageUser.layer.masksToBounds = false
+            self.imageUser.clipsToBounds = true
+            self.imageUser.layer.cornerRadius = self.imageUser.frame.size.width / 2
+        }
+        
+       
         
     }
     

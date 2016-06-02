@@ -76,7 +76,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A ti y 5 personas más les gusta esto" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ef5-ru-KYn">
                                         <rect key="frame" x="15" y="5" width="251.5" height="42.5"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="11"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -109,6 +109,9 @@
                     <constraint firstItem="RLg-Ut-pkb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="yW0-7e-ArM"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="labNumberLike" destination="ef5-ru-KYn" id="WvQ-BT-qON"/>
+            </connections>
             <point key="canvasLocation" x="285" y="346.5"/>
         </tableViewCell>
     </objects>

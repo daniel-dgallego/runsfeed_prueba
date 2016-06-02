@@ -10,6 +10,10 @@ import UIKit
 
 class CellDataRun: UITableViewCell {
 
+    @IBOutlet weak var labDistancia: UILabel!
+    @IBOutlet weak var labDuration: UILabel!
+    @IBOutlet weak var labRitmo: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

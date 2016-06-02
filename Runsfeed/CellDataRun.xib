@@ -36,7 +36,7 @@
                                             <constraint firstAttribute="height" constant="15" id="wpJ-kr-uqp"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="12"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sb4-pg-rm7">
@@ -78,7 +78,7 @@
                                             <constraint firstAttribute="height" constant="15" id="88Z-03-Nxr"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="12"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ErB-6y-bAE">
@@ -120,7 +120,7 @@
                                             <constraint firstAttribute="height" constant="15" id="AoQ-z8-WA1"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="12"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -165,6 +165,11 @@
                     <constraint firstAttribute="trailing" secondItem="nIp-Ab-l65" secondAttribute="trailing" id="z9b-ab-XZt"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="labDistancia" destination="1gg-Kx-gLQ" id="NTg-1h-2Wb"/>
+                <outlet property="labDuration" destination="gVy-X4-ApU" id="aqa-4U-Vx0"/>
+                <outlet property="labRitmo" destination="rl4-EU-lq6" id="NLX-qv-0fu"/>
+            </connections>
             <point key="canvasLocation" x="290.5" y="293"/>
         </tableViewCell>
     </objects>

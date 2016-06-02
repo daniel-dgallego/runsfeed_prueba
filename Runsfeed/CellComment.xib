@@ -53,7 +53,7 @@
                                                     <constraint firstAttribute="height" constant="20" id="FvL-iA-u6F"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="13"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="que bonito hay estuve yo la semana pasada" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RNB-33-kIk">
@@ -138,6 +138,10 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="imageUser" destination="tZB-bk-nAi" id="41p-2z-8Yx"/>
+                <outlet property="labComentario" destination="RNB-33-kIk" id="FI9-Gr-v5I"/>
+                <outlet property="labNameUser" destination="ehm-Jz-cn8" id="D0i-oI-dD8"/>
+                <outlet property="labTotal" destination="bHP-hS-Mbt" id="BZg-ww-ach"/>
+                <outlet property="viewGeneral" destination="MbY-EE-tAh" id="2Ul-cN-fSl"/>
             </connections>
             <point key="canvasLocation" x="275.5" y="371"/>
         </tableViewCell>

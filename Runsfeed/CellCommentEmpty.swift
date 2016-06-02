@@ -1,17 +1,15 @@
 //
-//  CellLike.swift
+//  CellCommentEmpty.swift
 //  Runsfeed
 //
-//  Created by Daniel Gallego Peralta on 25/5/16.
+//  Created by Daniel Gallego Peralta on 2/6/16.
 //  Copyright © 2016 runator.com. All rights reserved.
 //
 
 import UIKit
 
-class CellLike: UITableViewCell {
+class CellCommentEmpty: UITableViewCell {
 
-    @IBOutlet weak var labNumberLike: UILabel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,7 +25,7 @@ class CellLike: UITableViewCell {
     //MARK: - static method
     
     static func returnID()->String{
-        return "CellLike"
+        return "CellCommentEmpty"
     }
     
 }

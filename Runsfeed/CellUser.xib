@@ -46,8 +46,8 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="4Yx-KF-QJ8"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="13"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="12"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Benidorm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i6R-ib-UNg">
@@ -157,6 +157,10 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="imageUser" destination="Inc-fT-lUT" id="w5M-L8-cyj"/>
+                <outlet property="labCiudad" destination="i6R-ib-UNg" id="TGB-5D-2hM"/>
+                <outlet property="labFecha" destination="dgk-ZN-Esi" id="6fD-WU-n52"/>
+                <outlet property="labHora" destination="7qY-0U-p4j" id="6qN-br-CVB"/>
+                <outlet property="labUser" destination="dog-vE-Rnq" id="Hva-3w-Vtl"/>
             </connections>
             <point key="canvasLocation" x="221.5" y="472.5"/>
         </tableViewCell>

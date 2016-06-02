@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15B42" minimumToolsVersion="Xcode 7.0">
+    <entity name="Comentario" representedClassName=".Comentario" syncable="YES">
+        <attribute name="texto" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="runRelation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Run" inverseName="commentRelation" inverseEntity="Run" syncable="YES"/>
+        <relationship name="userRelation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="commentRel" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="ImgRun" representedClassName=".ImgRun" syncable="YES">
+        <attribute name="imgData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="runRelation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Run" inverseName="imgRelation" inverseEntity="Run" syncable="YES"/>
+    </entity>
+    <entity name="ImgUser" representedClassName=".ImgUser" syncable="YES">
+        <attribute name="dataImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="imagen" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="imagenPer" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Run" representedClassName=".Run" syncable="YES">
+        <attribute name="distancia" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="duracion" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fecha" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="lugar" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="numberLikes" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="ritmo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="totalComment" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="commentRelation" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Comentario" inverseName="runRelation" inverseEntity="Comentario" syncable="YES"/>
+        <relationship name="imgRelation" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ImgRun" inverseName="runRelation" inverseEntity="ImgRun" syncable="YES"/>
+        <relationship name="relationPer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="relationsRun" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName=".User" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nombre" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="commentRel" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Comentario" inverseName="userRelation" inverseEntity="Comentario" syncable="YES"/>
+        <relationship name="imagenPer" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ImgUser" inverseName="imagen" inverseEntity="ImgUser" syncable="YES"/>
+        <relationship name="relationsRun" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Run" inverseName="relationPer" inverseEntity="Run" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Comentario" positionX="-9" positionY="117" width="128" height="90"/>
+        <element name="ImgRun" positionX="-27" positionY="99" width="128" height="90"/>
+        <element name="ImgUser" positionX="-54" positionY="0" width="128" height="90"/>
+        <element name="Run" positionX="-36" positionY="36" width="128" height="240"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="120"/>
+    </elements>
+</model>

@@ -11,6 +11,10 @@ import UIKit
 class CellUser: UITableViewCell {
 
     @IBOutlet weak var imageUser: UIImageView!
+    @IBOutlet weak var labCiudad: UILabel!
+    @IBOutlet weak var labUser: UILabel!
+    @IBOutlet weak var labFecha: UILabel!
+    @IBOutlet weak var labHora: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
