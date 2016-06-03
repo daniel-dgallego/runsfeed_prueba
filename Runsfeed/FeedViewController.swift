@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ApiDelegate {
 
@@ -42,7 +43,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         setup()
         readData()
         
-        
+        self.performSelector(#selector(self.checkIfConnected), withObject: nil, afterDelay: 6)
         
         
     }
@@ -118,28 +119,35 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         switch indexPath.row {
         case 0:
             let cell  = setupCellUser(run, user: user!, indexPath: indexPath)
+            cell.selectionStyle = .None
             return cell
             
         case 1:
             let cell  = setupCellDataRun(run, indexPath: indexPath)
+            cell.selectionStyle = .None
             return cell
             
         case 2:
-            let cell = setupCellMap(indexPath)
+            let cell = setupCellMap(run, indexPath: indexPath)
+            cell.selectionStyle = .None
             return cell
         
         case 3:
             let cell = setupCellLike(run, indexPath: indexPath)
+            cell.selectionStyle = .None
             return cell
             
         default:
             let comentario = run.returnLastComment()
+            
             if let comment = comentario{
                 let cell = setupCellComment(run, comment: comment, indexPath: indexPath)
+                cell.selectionStyle = .None
                 return cell
             }
             else{
                 let cell = tableFeed.dequeueReusableCellWithIdentifier(CellCommentEmpty.returnID(), forIndexPath: indexPath) as! CellCommentEmpty
+                cell.selectionStyle = .None
                 return cell
             }
 
@@ -160,16 +168,58 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let cell = tableFeed.dequeueReusableCellWithIdentifier(CellUser.returnID(), forIndexPath: indexPath) as! CellUser
         
+        cell.imageUser.image = nil
+        
         cell.labCiudad.text = ""
         cell.labUser.text = ""
         cell.labFecha.text = ""
         cell.labHora.text = ""
         
-        cell.labCiudad.text = run.lugar
+        var sitio = ""
+        
+        if let ciudad = run.city{
+            sitio = "\(ciudad)"
+        }
+        
+        
+        if let pais = run.pais{
+            sitio = "\(sitio), \(pais)"
+        }
+        
+        cell.labCiudad.text = sitio
         cell.labUser.text = user.nombre
         cell.labFecha.text = run.fecha?.fechaCompleta()
         cell.labHora.text = run.fecha?.horaCompleta()
         
+        //imagen usuario
+        let entityImg = user.imagenPer
+        
+        if let entity = entityImg{
+            
+            //hay imagen
+            if let data = entity.dataImage{
+                cell.imageUser.image = UIImage(data: data)
+            }
+            else{
+                //descargar
+                let strUrl = entity.url!
+                
+                NSURLSession.sharedSession().dataTaskWithURL( NSURL(string:strUrl)!, completionHandler: {
+                    (data, response, error) -> Void in
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let data = data {
+                            cell.imageUser.image = UIImage(data: data)
+                            entity.dataImage = data
+                        }
+                    }
+                    
+                }).resume()
+                
+                
+            }
+            
+        }
         
         return cell
         
@@ -192,8 +242,112 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-    func setupCellMap(indexPath: NSIndexPath)->CellMap{
+    func setupCellMap(run: Run, indexPath: NSIndexPath)->CellMap{
         let cell = tableFeed.dequeueReusableCellWithIdentifier(CellMap.returnID(), forIndexPath: indexPath) as! CellMap
+        
+        cell.imgCarrera.image = nil
+        
+        //imagen de la carrera
+        let entityImg = run.imgRelation
+        
+        if let entity = entityImg{
+            
+            cell.imgCarrera.hidden = false
+            
+            //hay imagen
+            if let data = entity.imgData{
+                cell.imgCarrera.image = UIImage(data: data)
+            }
+            else{
+                //descargar
+                let strUrl = entity.url!
+                
+                NSURLSession.sharedSession().dataTaskWithURL( NSURL(string:strUrl)!, completionHandler: {
+                    (data, response, error) -> Void in
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let data = data {
+                            cell.imgCarrera.image = UIImage(data: data)
+                            entity.imgData = data
+                        }
+                    }
+                    
+                }).resume()
+            }
+        }
+        else{
+            cell.imgCarrera.hidden = true
+        }
+        
+        
+
+        
+        //localizacion
+        
+        var boolHasLocation = false
+        
+        let lat =  run.latitude?.doubleValue
+        let long = run.longitude?.doubleValue
+        
+        if let lati = lat{
+            if let longi = long{
+                
+                if lati != 0 && longi != 0{
+                    boolHasLocation = true
+                }
+                
+            }
+        }
+        
+        if boolHasLocation{
+            cell.showLocation(lat!, longitude: long!)
+        }
+        else{
+            var address = ""
+            
+            if let zona = run.zona{
+                address = "\(zona)"
+            }
+            
+            if let ciudad = run.city{
+                address = "\(address), \(ciudad)"
+            }
+            
+            if let state = run.state{
+                address = "\(address), \(state)"
+            }
+            
+            
+            if let pais = run.pais{
+                address = "\(address), \(pais)"
+            }
+            
+            let gc:CLGeocoder = CLGeocoder()
+            
+            gc.geocodeAddressString(address) { (placemarks, error) in
+                
+                if let place = placemarks{
+                    
+                    if (place.count > 0){
+                        
+                        let p = place[0]
+                        
+                        let latitude = p.location!.coordinate.latitude
+                        let longitude = p.location!.coordinate.longitude
+                        
+                        dispatch_async(dispatch_get_main_queue(), {
+                            cell.showLocation(latitude, longitude: longitude)
+                            run.latitude = latitude
+                            run.longitude = longitude
+                        })
+                    }
+                }
+            }
+ 
+        }
+        
+        
+        
         
         return cell
     }
@@ -219,6 +373,10 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableFeed.dequeueReusableCellWithIdentifier(CellComment.returnID(), forIndexPath: indexPath) as! CellComment
         
         
+        
+        
+        cell.imageUser.image = nil
+        
         let user = comment.userRelation
         
         cell.labComentario.text = comment.texto
@@ -232,6 +390,38 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         cell.labTotal.text = textTotal
+        
+        
+        //imagen usuario
+        let entityImg = user?.imagenPer
+        
+        if let entity = entityImg{
+            
+            //hay imagen
+            if let data = entity.dataImage{
+                cell.imageUser.image = UIImage(data: data)
+            }
+            else{
+                //descargar
+                let strUrl = entity.url!
+                
+                NSURLSession.sharedSession().dataTaskWithURL( NSURL(string:strUrl)!, completionHandler: {
+                    (data, response, error) -> Void in
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let data = data {
+                            cell.imageUser.image = UIImage(data: data)
+                            entity.dataImage = data
+                        }
+                    }
+                    
+                }).resume()
+                
+                
+            }
+            
+        }
+
         
         
         return cell
@@ -337,6 +527,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }, completion: nil)
         
         self.tableFeed.reloadData()
+        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        self.tableFeed.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
         
     }
     
@@ -348,43 +540,21 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
            self.vistaNew = self.createViewNew()
             self.view.addSubview(self.vistaNew)
             
-         
-            
-            let height = NSLayoutConstraint(item: self.vistaNew, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 70)
-            
-            let width = NSLayoutConstraint(item: self.vistaNew, attribute: .Width, relatedBy: .Equal, toItem: self.tableFeed, attribute: .Width, multiplier: 1, constant: 0)
-            
-            let alignx = NSLayoutConstraint(item: self.vistaNew, attribute: .CenterX, relatedBy: .Equal, toItem: self.viewContainer, attribute: .CenterX, multiplier: 1, constant: 0)
-            
-          
-            
-            
-            
-            let top = NSLayoutConstraint(item: self.vistaNew, attribute: .Top, relatedBy: .Equal, toItem: self.viewContainer, attribute: .Top, multiplier: 1, constant: 15)
-            
-            self.view.addConstraints([height, width, alignx, top])
-            
-            UIView.animateWithDuration(0.6, delay: 0, options: .TransitionCurlUp, animations: {
+            UIView.animateWithDuration(0.6, delay: 0, options: .TransitionNone, animations: {
                 self.topConstantTable.constant = 65
+                self.vistaNew.frame.origin.y = 20
                 self.view.setNeedsUpdateConstraints()
                 self.view.layoutIfNeeded()
             }, completion: nil)
             
-        
-            
-            
-            
         }
-        
-        
     }
     
     
     func createViewNew()->UIView{
         
-        let vista = UIView()
-        vista.translatesAutoresizingMaskIntoConstraints = false
-        vista.backgroundColor = UIColor.grayColor()
+        let vista = UIView(frame: CGRect(x: self.tableFeed.frame.origin.x, y: -50, width: self.tableFeed.frame.size.width, height: 50))
+        vista.backgroundColor = UIColor(netHex: 0xbdc3c7)
         
         
         vista.userInteractionEnabled = true
@@ -392,48 +562,38 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         vista.addGestureRecognizer(tap)
         
         
-        
-        let labelMsg = UILabel()
-        labelMsg.translatesAutoresizingMaskIntoConstraints = false
-        labelMsg.text = "\(self.arrayNewRunning.count) carreras nuevas"
-        vista.addSubview(labelMsg)
-        
-        
-        let heightL = NSLayoutConstraint(item: labelMsg, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 20)
-        
-        let widthL = NSLayoutConstraint(item: labelMsg, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 145)
-       
-        
-         let alignXL = NSLayoutConstraint(item: labelMsg, attribute: .CenterX, relatedBy: .Equal, toItem: vista, attribute: .CenterX, multiplier: 1, constant: 0)
-        
-        let alignyL = NSLayoutConstraint(item: labelMsg, attribute: .CenterY, relatedBy: .Equal, toItem: vista, attribute: .CenterY, multiplier: 1, constant: 0)
-        
-        
-        vista.addConstraints([heightL, widthL, alignXL, alignyL])
-        
-        
-        
-        let icono = UIImageView(image: UIImage(named: "up"))
-        icono.translatesAutoresizingMaskIntoConstraints = false
+        let icono = UIImageView(frame: CGRect(x: 20, y: 10, width: 30, height: 30))
+        icono.image = UIImage(named: "up")
         vista.addSubview(icono)
         
-        let height = NSLayoutConstraint(item: icono, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 30)
         
-        let width = NSLayoutConstraint(item: icono, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 30)
+        let posx = icono.frame.origin.x + icono.frame.size.width
+        let width = vista.frame.size.width - posx
         
-        let left = NSLayoutConstraint(item: icono, attribute: .Left, relatedBy: .Equal, toItem: labelMsg, attribute: .Left, multiplier: 1, constant: -50)
-        
-        let aligny = NSLayoutConstraint(item: icono, attribute: .CenterY, relatedBy: .Equal, toItem: vista, attribute: .CenterY, multiplier: 1, constant: 0)
-        
-        
-        vista.addConstraints([height, width, aligny, left])
+        let labelMsg = UILabel(frame: CGRect(x: posx, y: 0, width: width, height: vista.frame.size.height))
+        //labelMsg.translatesAutoresizingMaskIntoConstraints = false
         
         
+        var texto = ""
+        
+        if self.arrayNewRunning.count > 1{
+            texto = "\(self.arrayNewRunning.count) carreras nuevas"
+        }
+        else{
+            "\(self.arrayNewRunning.count) carrera nueva"
+        }
+        
+        labelMsg.text = texto
+        labelMsg.textAlignment = .Center
+        labelMsg.textColor = UIColor.whiteColor()
+        vista.addSubview(labelMsg)
         
         return vista
     }
     
-    //Conectividad - actualiza estado
+    
+    
+    //MARK: - Conectividad
     func networkStatusChanged(notification: NSNotification) {
         
         
@@ -468,6 +628,23 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             boolDataRead = false
           
         }
+    }
+    
+    
+    func checkIfConnected(){
+        
+        if self.connection == typeConnection.None || self.connection == typeConnection.Off{
+            
+            
+            let controller = UIAlertController(title: "Problemas de conexión", message: "Comprueba su conexión a internet y vuelva a intentarlo", preferredStyle: .Alert)
+            
+            let ok = UIAlertAction(title: "ok", style: .Cancel, handler: nil)
+            
+            controller.addAction(ok)
+            
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+        
     }
     
     

@@ -15,17 +15,27 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Se el primero el comentar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JrF-cn-A6N">
-                        <rect key="frame" x="0.0" y="0.0" width="334" height="77.5"/>
+                        <rect key="frame" x="0.0" y="3" width="334" height="74.5"/>
                         <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4nY-qX-beF">
+                        <rect key="frame" x="20" y="0.0" width="294" height="2"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="S87-vP-eEb"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="JrF-cn-A6N" secondAttribute="trailing" id="AX6-W1-eT2"/>
+                    <constraint firstAttribute="trailing" secondItem="4nY-qX-beF" secondAttribute="trailing" constant="20" id="FAM-gI-AMP"/>
                     <constraint firstItem="JrF-cn-A6N" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="G0J-xa-4Zd"/>
+                    <constraint firstItem="4nY-qX-beF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Kv4-dk-uRm"/>
                     <constraint firstAttribute="bottom" secondItem="JrF-cn-A6N" secondAttribute="bottom" id="bW4-ST-2fz"/>
-                    <constraint firstItem="JrF-cn-A6N" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="nHi-7A-2Yx"/>
+                    <constraint firstItem="4nY-qX-beF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="hfk-3w-2FU"/>
+                    <constraint firstItem="JrF-cn-A6N" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="nHi-7A-2Yx"/>
                 </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="258" y="264"/>

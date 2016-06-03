@@ -29,6 +29,9 @@ class Run: NSManagedObject {
     class func returnRunOrder(context: NSManagedObjectContext)->Array<Run>{
         
         let req = NSFetchRequest(entityName: Run.entityName())
+        let descriptor = NSSortDescriptor(key: "fecha", ascending: false)
+        let sortDescriptors = [descriptor]
+        req.sortDescriptors = sortDescriptors
         
         do{
             let result = try context.executeFetchRequest(req) as! Array<Run>
@@ -74,10 +77,9 @@ class Run: NSManagedObject {
     }
     
     
-    convenience init(iden: String, ciudad: String, distance: Double, duration : String, numberLike: Int, ritmo: String, fecha: NSDate, context: NSManagedObjectContext){
+    convenience init(iden: String, distance: Double, duration : String, numberLike: Int, ritmo: String, fecha: NSDate, context: NSManagedObjectContext){
         self.init(managedObjectContext: context)
         self.id = iden
-        self.lugar = ciudad
         self.distancia = distance
         self.duracion = duration
         self.numberLikes = numberLike

@@ -136,9 +136,6 @@ class API{
                     
                     if carrera == nil{
                         
-                        //localizacion
-                        let ciudad = run["city"] as! String
-                        
                         
                         //distancia y duracion
                         var distance : Double = 0
@@ -147,7 +144,6 @@ class API{
                         if let distancia = getDistan{
                             distance = distancia.roundToPlaces(1)
                         }
-                        
                         
                         
                         var duracion = run["durationDisplay"] as? String
@@ -175,7 +171,7 @@ class API{
                         
                         
                         //Run Object CoreData y photo run
-                        carrera = Run(iden: runId, ciudad: ciudad, distance: distance, duration: duracion!, numberLike: numberLikes, ritmo: ritmo, fecha: fecha, context: privateContext)
+                        carrera = Run(iden: runId, distance: distance, duration: duracion!, numberLike: numberLikes, ritmo: ritmo, fecha: fecha, context: privateContext)
                         carrera?.relationPer = usuario
                         
                         let photoRunUrl = inuser["photo"] as? String
@@ -184,6 +180,14 @@ class API{
                             let ImgR = ImgRun(url: fotoRun, context: privateContext)
                             ImgR.runRelation = carrera
                         }
+                        
+                        
+                        
+                        //obtenemos localizacion
+                        if let carr = carrera{
+                                self.getLocation(run as! Dictionary<String, AnyObject>, carrera: carr)
+                        }
+                        
                         
                         
                         //comentario
@@ -333,6 +337,35 @@ class API{
         }
         
 
+    }
+    
+    
+    
+    func getLocation(dic: Dictionary<String, AnyObject>, carrera: Run){
+        
+        let neigh = dic["neighborhood"] as? String
+        let city = dic["city"] as? String
+        let state = dic["state"] as? String
+        let pais = dic["country"] as? String
+        
+        if let zona = neigh{
+            carrera.zona = zona
+        }
+        
+        if let ciudad = city{
+            carrera.city = ciudad
+        }
+        
+        if let comunidad = state{
+            carrera.state = comunidad
+        }
+        
+        if let country = pais{
+            carrera.pais = country
+        }
+        
+        
+        
     }
     
     
